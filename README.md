@@ -1,6 +1,15 @@
-frontend-nanodegree-arcade-game
-===============================
+# Frogger Game Description
+The game consists of player and enemies. To win the player must reach the water, without colliding with any one of the enemies. The player can move left and right, up and down. In case the player collided with the enemy, the game will be reset and the player moves back to the starting box and the player will lose one score. If the player reaches the water he will win the game and the player will earn one score and move to the next level which will be more difficult.
 
-Students should use this [rubric](https://review.udacity.com/#!/projects/2696458597/rubric) for self-checking their submission. Make sure the functions you write are **object-oriented** - either class functions (like Player and Enemy) or class prototype functions such as Enemy.prototype.checkCollisions, and that the keyword 'this' is used appropriately within your class and class prototype functions to refer to the object the function is called upon. Also be sure that the **readme.md** file is updated with your instructions on both how to 1. Run and 2. Play your arcade game.
+## Installation
+To run the game:
+1. Download the GitHub zip file or clone the repository onto your local workstation:
+2. Open index.html through Internet browser.
 
-For detailed instructions on how to get started, check out this [guide](https://docs.google.com/document/d/1v01aScPjSWCCWQLIpFqvg3-vXLH2e8_SZQKC8jNO0Dc/pub?embedded=true).
+## Repository Folder Description
+The repository contains the folders as the follow
+* The css folder contains a style.css file.
+* The images folder contains the png image files, which are used when displaying the game.
+* The js folder also contains the app engine needed to run the game and a resources.js file.
+* index.html - opening index.html should load the game.
+* README.md  contain instructions on how to load and play the game.
