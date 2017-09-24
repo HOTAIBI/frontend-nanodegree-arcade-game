@@ -34,17 +34,7 @@ Enemy.prototype.update = function(dt) {
     // To Check collision
     this.checkCollisions();
 };
-Enemy.prototype.checkCollisions = function() {
-    // check for collision between enemy and player
-    if (
-        player.y + 131 >= this.y + 90 && player.x + 25 <= this.x + 88 && player.y + 73 <= this.y + 135 && player.x + 76 >= this.x + 11) {
-        alert('You lose');
-        player.reset();
-        //decrease score
-        player.score -= 1;
 
-    }
-};
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
@@ -53,7 +43,7 @@ Enemy.prototype.render = function() {
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
-var Player = function(x, y, speed, score, Level) {
+var Player = function(x, y, speed, score, level) {
     this.sprite = 'images/char-boy.png';
     this.speed = speed;
     this.x = x;
@@ -61,17 +51,16 @@ var Player = function(x, y, speed, score, Level) {
     // player score
     this.score = score;
     // game level
-    this.Level = Level;
+    this.level = level;
 };
 
 Player.prototype.update = function() {
     // To check player reaching top
-    if (player.y < 60) {
-        player.reset();
-        alert('You won');
+    if (this.y < 60) {
+        this.reset();
         // increace score and level when player won
         this.score += 1;
-        this.Level += 1;
+        this.level += 1;
         // icreace defaclity of game
         DifficultyOfLevel();
 
@@ -84,34 +73,45 @@ Player.prototype.update = function() {
 
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-    ShowScoreAndLevel(this.score, this.Level);
+    ShowScoreAndLevel(this.score, this.level);
 
 };
 
 Player.prototype.handleInput = function(keyPress) {
     if (keyPress == 'right') {
-        player.x += player.speed;
+        this.x += this.speed;
     }
     if (keyPress == 'left') {
-        player.x -= player.speed;
+        this.x -= this.speed;
     }
     if (keyPress == 'down') {
-        player.y += player.speed;
+        this.y += this.speed+30;
     }
     if (keyPress == 'up') {
-        player.y -= player.speed;
+        this.y -= this.speed+30;
     }
     //To prevent player  from play out boundary
-    if (player.y > 383) {
-        player.y = 383;
+    if (this.y > 383) {
+        this.y = 383;
     }
-    if (player.x > 402.5) {
-        player.x = 402.5;
+    if (this.x > 402.5) {
+        this.x = 402.5;
     }
-    if (player.x < 2.5) {
-        player.x = 2.5;
+    if (this.x < 2.5) {
+        this.x = 2.5;
     }
 
+};
+
+Enemy.prototype.checkCollisions = function() {
+    // check for collision between enemy and player
+    if (
+        player.y + 131 >= this.y + 90 && player.x + 25 <= this.x + 88 && player.y + 73 <= this.y + 135 && player.x + 76 >= this.x + 11) {
+        player.reset();
+        //decrease score
+        player.score -= 1;
+
+    }
 };
 
 // to Show   score of player  and level of game
@@ -130,8 +130,8 @@ var DifficultyOfLevel = function() {
     allEnemies.length = 0;
 
     //add enemies based on number score
-    for (var i = 0; i <= player.Level; i++) {
-        var enemy = new Enemy(0, Math.random() * 184 + 80, Math.random() * 256);
+    for (var i = 0; i <= player.level; i++) {
+        var enemy = new Enemy(0, Math.random() * 184 + 50, Math.random() * 256);
 
         allEnemies.push(enemy);
     }
@@ -142,8 +142,8 @@ var DifficultyOfLevel = function() {
 // Place the player object in a variable called player
 
 var allEnemies = [];
-var player = new Player(202.5, 383, 80, 0, 1);
-var enemy = new Enemy(0, Math.random() * 184 + 80, Math.random() * 256);
+var player = new Player(202.5, 383, 50, 0, 1);
+var enemy = new Enemy(0, Math.random() * 184 + 50, Math.random() * 256);
 
 allEnemies.push(enemy);
 
